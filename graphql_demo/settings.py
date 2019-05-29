@@ -39,13 +39,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'graphene_django',
+    'corsheaders',
 
     'blog'
 ]
 
+CORS_ORIGIN_WHITELIST = ('localhost:8080',)
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_METHODS = ('OPTIONS', 'GET', 'POST')
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -73,6 +79,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'graphql_demo.wsgi.application'
 
+SESSION_COOKIE_HTTPONLY= True
+SESSION_COOKIE_AGE = 30*60  # 30 min
+SESSION_SAVE_EVERY_REQUEST = True
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
